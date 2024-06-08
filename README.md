@@ -13,5 +13,13 @@
 
 ### Web & API
 
-- frontend http://localhost:3001
+- frontend http://localhost:3000
 - backend http://localhost:3001
+
+## TODO
+
+- tests
+
+## Resources
+
+- https://dev.to/sairyss/domain-driven-hexagon-18g5
