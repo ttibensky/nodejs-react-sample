@@ -1,7 +1,16 @@
 # Node.js + React.js Sample App
 
 This repository is a showcase of various technologies, architectonal principles and libraries.
-It utilizes JavaScript, Typescript, Nest.js backend framework and React.js frontend framework, Domain Driven Design (DDD), Hexagonal Architecture, Command and Query Responsibility Segregation (CQRS).
+It utilizes:
+
+- [JavaScript](https://javascript.info/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Nest.js](nestjs.com)
+- [React.js](https://react.dev/)
+- [Domain-driven Design (DDD)](https://en.wikipedia.org/wiki/Domain-driven_design)
+- [Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software))
+- [Command and Query Responsibility Segregation (CQRS)](https://en.wikipedia.org/wiki/Command_Query_Responsibility_Segregation)
+- [value objects](https://en.wikipedia.org/wiki/Value_object)
 
 ## Requirements
 
@@ -26,9 +35,11 @@ It utilizes JavaScript, Typescript, Nest.js backend framework and React.js front
 - error handling (e.g. POST /jobs when a mongoose connection fails)
 - asynchronous command and event processing
 - correlation and causation ids
+- event sourcing
 - tests
 
 ## Resources
 
+- https://www.domainlanguage.com/ddd/blue-book/
 - https://docs.nestjs.com/
 - https://dev.to/sairyss/domain-driven-hexagon-18g5
