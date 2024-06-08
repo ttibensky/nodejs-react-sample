@@ -9,6 +9,16 @@ services:
     ports:
       - 3001:3000
 
+  frontend:
+    image: node:20.14.0-alpine3.19
+    restart: always
+    command: sh -c 'npm i && npm run dev'
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    ports:
+      - 3000:3000
+
   mongo:
     image: mongo:5.0.27-focal
     restart: always
