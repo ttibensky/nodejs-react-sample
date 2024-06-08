@@ -15,11 +15,14 @@
 
 - frontend http://localhost:3000
 - backend http://localhost:3001
+- backend http://localhost:3001/api
 
 ## TODO
 
+- asynchronous command and event processing
 - tests
 
 ## Resources
 
+- https://docs.nestjs.com/
 - https://dev.to/sairyss/domain-driven-hexagon-18g5

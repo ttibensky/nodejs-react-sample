@@ -9,7 +9,7 @@ export type Job = {
   technician: string;
 };
 
-export const createJob = (
+export const initJob = (
   id: number,
   customerName: string,
   jobType: string,

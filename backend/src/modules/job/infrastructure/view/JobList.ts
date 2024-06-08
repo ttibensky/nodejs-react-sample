@@ -4,6 +4,6 @@ export type JobList = {
   jobs: Job[];
 };
 
-export const createJobList = (jobs: Job[]): JobList => ({
+export const initJobList = (jobs: Job[]): JobList => ({
   jobs,
 });
