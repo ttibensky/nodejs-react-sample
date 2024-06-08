@@ -1,0 +1,9 @@
+services:
+  backend:
+    image: node:20.14.0-alpine3.19
+    command: sh -c 'npm i && npm run start:dev'
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    ports:
+      - 3001:3000
