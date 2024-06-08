@@ -10,7 +10,7 @@ export class CreateJobCommandHandler
 {
   constructor(@Inject(Jobs) private readonly repository: Jobs) {}
 
-  async execute(command: CreateJobCommand) {
+  async execute(command: CreateJobCommand): Promise<void> {
     const job = Job.create(
       command.id,
       command.customerName,
@@ -20,6 +20,6 @@ export class CreateJobCommandHandler
       command.technician,
     );
 
-    this.repository.save(job);
+    this.repository.create(job);
   }
 }

@@ -11,7 +11,6 @@ import {
 } from '@nestjs/common';
 import { JobListView, initJobListView } from '../../view/JobListView';
 import { JobView, initJobView } from '../../view/JobView';
-import { formatISO, parseISO } from 'date-fns';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiBody } from '@nestjs/swagger';
 import { CreateJobCommandDTO } from './dto/CreateJobCommandDTO';

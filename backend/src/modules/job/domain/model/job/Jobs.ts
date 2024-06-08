@@ -7,7 +7,9 @@ export interface Jobs {
   get(id: JobId): Promise<Either<Error, Job>>;
   find(id: JobId): Promise<Maybe<Job>>;
   search(query: SearchJobsQuery): Promise<Job[]>;
-  save(job: Job): Promise<void>;
+  create(job: Job): Promise<void>;
+  update(job: Job): Promise<void>;
+  delete(id: JobId): Promise<void>;
 }
 
 export const Jobs = Symbol('Jobs');

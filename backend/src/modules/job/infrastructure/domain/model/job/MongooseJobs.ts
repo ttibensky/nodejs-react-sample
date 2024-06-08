@@ -18,17 +18,49 @@ export class MongooseJobs implements Jobs {
   }
 
   async find(id: JobId): Promise<Maybe<Job>> {
-    return Maybe.fromNullable(await this.model.findById(id.toString()).exec());
+    return Maybe.fromNullable(
+      await this.model.findById(id.toString()).exec(),
+    ).map(
+      (job) =>
+        new Job(
+          job.id,
+          job.customerName,
+          job.type,
+          job.status,
+          job.appointmentDate,
+          job.technician,
+        ),
+    );
   }
 
   async search(query: SearchJobsQuery): Promise<Job[]> {
     // @TODO add search criteria
-    return (await this.model.find().exec()) as Job[];
+    return (await this.model.find().exec()).map(
+      (job) =>
+        new Job(
+          job.id,
+          job.customerName,
+          job.type,
+          job.status,
+          job.appointmentDate,
+          job.technician,
+        ),
+    ) as Job[];
   }
 
-  async save(job: Job): Promise<void> {
+  async create(job: Job): Promise<void> {
     const createdCat = new this.model(job);
 
     await createdCat.save();
+  }
+
+  async update(job: Job): Promise<void> {
+    await this.model
+      .findByIdAndUpdate(job.id.toString(), new this.model(job))
+      .exec();
+  }
+
+  async delete(id: JobId): Promise<void> {
+    await this.model.findByIdAndDelete(id.toString()).exec();
   }
 }

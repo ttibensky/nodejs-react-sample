@@ -1,4 +1,4 @@
-import mongoose, { HydratedDocument } from 'mongoose';
+import { HydratedDocument, Schema } from 'mongoose';
 import { Job } from 'src/modules/job/domain/model/job/Job';
 import { JobAppointmentDate } from 'src/modules/job/domain/model/job/value-objects/JobAppointmentDate';
 import { JobCustomerName } from 'src/modules/job/domain/model/job/value-objects/JobCustomerName';
@@ -9,7 +9,7 @@ import { JobType } from 'src/modules/job/domain/model/job/value-objects/JobType'
 
 export type JobDocument = HydratedDocument<Job>;
 
-export const JobSchema = new mongoose.Schema({
+export const JobSchema = new Schema({
   _id: String,
   customerName: { type: String, get: (v: string) => new JobCustomerName(v) },
   type: { type: String, get: (v: string) => new JobType(v) },
