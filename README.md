@@ -9,6 +9,7 @@ It utilizes:
 - frameworks
   - [Nest.js](nestjs.com)
   - [React.js](https://react.dev/)
+  - [Vite](https://vitejs.dev/) for fast build, project startup and updates
 - principles:
   - [Domain-driven Design (DDD)](https://en.wikipedia.org/wiki/Domain-driven_design)
   - [Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software))
@@ -22,8 +23,8 @@ It utilizes:
   - `purify-ts` to provide a funcional (and more readable) way of handling and avoiding null values and nested conditions
   - `uuid` to generate IDs and primary keys for entities, commands, events and queries
 - command line utilities:
-  - [Docker](https://www.docker.com/)
-  - [Task](https://taskfile.dev/)
+  - [Docker](https://www.docker.com/) for stable environment
+  - [Task](https://taskfile.dev/) for easier command line usage
 
 ## Requirements
 

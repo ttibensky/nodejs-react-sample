@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import JobBoard from "./components/JobBoard";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="container">
+        <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+          <a
+            href="/"
+            className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none"
+          >
+            <span className="fs-4">Node.js + React.js Sample App</span>
+          </a>
+
+          <ul className="nav nav-pills">
+            <li className="nav-item">
+              <a href="#" className="nav-link active" aria-current="page">
+                Home
+              </a>
+            </li>
+            <li className="nav-item">
+              <span className="nav-link" title="Comming soon">
+                Features
+              </span>
+            </li>
+            <li className="nav-item">
+              <span className="nav-link" title="Comming soon">
+                About
+              </span>
+            </li>
+          </ul>
+        </header>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+
+      <div className="container py-4 px-3 mx-auto mb-4 border-bottom">
+        <h1>Hello, welcome to the sample app!</h1>
+        <p className="mb-0">
+          This app is a showcase of various technologies, architectonal
+          principles and libraries.
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <JobBoard />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
