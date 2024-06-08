@@ -15,11 +15,12 @@
 
 - frontend http://localhost:3000
 - backend http://localhost:3001
-- backend http://localhost:3001/api
+- Swagger API documentation http://localhost:3001/api
 
 ## TODO
 
 - asynchronous command and event processing
+- correlation and causation ids
 - tests
 
 ## Resources

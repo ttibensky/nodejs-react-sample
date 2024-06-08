@@ -3,8 +3,11 @@ import { JobStatus } from '../value-objects/JobStatus';
 import { JobAppointmentDate } from '../value-objects/JobAppointmentDate';
 import { JobTechnician } from '../value-objects/JobTechnician';
 import { JobCustomerName } from '../value-objects/JobCustomerName';
+import { JobId } from '../value-objects/JobId';
+import { BaseCommand } from 'src/lib/common/domain/model/command/BaseCommand';
 
-export class CreateJobCommand {
+export class UpdateJobCommand extends BaseCommand {
+  id: JobId;
   customerName: JobCustomerName;
   type: JobType;
   status: JobStatus;
@@ -12,12 +15,15 @@ export class CreateJobCommand {
   technician: JobTechnician;
 
   constructor(
+    id: JobId,
     customerName: JobCustomerName,
     jobType: JobType,
     status: JobStatus,
     appointmentDate: JobAppointmentDate,
     technician: JobTechnician,
   ) {
+    super();
+    this.id = id;
     this.customerName = customerName;
     this.type = jobType;
     this.status = status;

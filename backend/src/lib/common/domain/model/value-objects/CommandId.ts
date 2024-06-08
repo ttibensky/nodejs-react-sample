@@ -1,3 +1,3 @@
-import { Identifier } from './common/Identifier';
+import { UuidIdentifier } from './common/UuidIdentifier';
 
-export class CommandId extends Identifier {}
+export class CommandId extends UuidIdentifier {}

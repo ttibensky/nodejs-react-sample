@@ -1,7 +1,7 @@
 import { ValueObject } from './ValueObject';
 import { v4 as uuidv4 } from 'uuid';
 
-export class Identifier extends ValueObject {
+export class UuidIdentifier extends ValueObject {
   uuid: string;
 
   constructor(uuid: string) {
@@ -10,7 +10,7 @@ export class Identifier extends ValueObject {
     // @TODO validate
   }
 
-  static generate(): Identifier {
+  static generate(): UuidIdentifier {
     return this.fromString(uuidv4());
   }
 
@@ -18,7 +18,7 @@ export class Identifier extends ValueObject {
     return this.uuid;
   }
 
-  static fromString(string: string): Identifier {
+  static fromString(string: string): UuidIdentifier {
     return new this(string);
   }
 }
