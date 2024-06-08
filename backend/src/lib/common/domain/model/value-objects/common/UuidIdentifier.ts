@@ -2,11 +2,8 @@ import { ValueObject } from './ValueObject';
 import { v4 as uuidv4 } from 'uuid';
 
 export class UuidIdentifier extends ValueObject {
-  uuid: string;
-
-  constructor(uuid: string) {
+  constructor(private uuid: string) {
     super();
-    this.uuid = uuid;
     // @TODO validate
   }
 

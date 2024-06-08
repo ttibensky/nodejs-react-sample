@@ -1,11 +1,8 @@
 import { ValueObject } from 'src/lib/common/domain/model/value-objects/common/ValueObject';
 
 export abstract class StringValueObject extends ValueObject {
-  value: string;
-
-  constructor(value: string) {
+  constructor(private value: string) {
     super();
-    this.value = value;
   }
 
   toString(): string {

@@ -7,27 +7,14 @@ import { JobId } from '../value-objects/JobId';
 import { BaseCommand } from 'src/lib/common/domain/model/command/BaseCommand';
 
 export class UpdateJobCommand extends BaseCommand {
-  id: JobId;
-  customerName: JobCustomerName;
-  type: JobType;
-  status: JobStatus;
-  appointmentDate: JobAppointmentDate;
-  technician: JobTechnician;
-
   constructor(
-    id: JobId,
-    customerName: JobCustomerName,
-    type: JobType,
-    status: JobStatus,
-    appointmentDate: JobAppointmentDate,
-    technician: JobTechnician,
+    public readonly id: JobId,
+    public readonly customerName: JobCustomerName,
+    public readonly type: JobType,
+    public readonly status: JobStatus,
+    public readonly appointmentDate: JobAppointmentDate,
+    public readonly technician: JobTechnician,
   ) {
     super();
-    this.id = id;
-    this.customerName = customerName;
-    this.type = type;
-    this.status = status;
-    this.appointmentDate = appointmentDate;
-    this.technician = technician;
   }
 }

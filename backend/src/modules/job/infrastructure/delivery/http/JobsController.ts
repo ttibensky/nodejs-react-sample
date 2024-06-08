@@ -4,14 +4,15 @@ import {
   Delete,
   Get,
   HttpCode,
+  NotFoundException,
   Param,
   Post,
   Put,
 } from '@nestjs/common';
-import { JobList, initJobList } from '../../view/JobList';
-import { Job, initJob } from '../../view/Job';
-import { parseISO } from 'date-fns';
-import { CommandBus } from '@nestjs/cqrs';
+import { JobListView, initJobListView } from '../../view/JobListView';
+import { JobView, initJobView } from '../../view/JobView';
+import { formatISO, parseISO } from 'date-fns';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiBody } from '@nestjs/swagger';
 import { CreateJobCommandDTO } from './dto/CreateJobCommandDTO';
 import { UpdateJobCommandDTO } from './dto/UpdateJobCommandDTO';
@@ -25,10 +26,16 @@ import { JobTechnician } from 'src/modules/job/domain/model/job/value-objects/Jo
 import { JobId } from 'src/modules/job/domain/model/job/value-objects/JobId';
 import { UpdateJobCommand } from 'src/modules/job/domain/model/job/command/UpdateJobCommand';
 import { DeleteJobCommand } from 'src/modules/job/domain/model/job/command/DeleteJobCommand';
+import { SearchJobsQuery } from 'src/modules/job/domain/model/job/query/SearchJobsQuery';
+import { FindJobQuery } from 'src/modules/job/domain/model/job/query/FindJobQuery';
+import { Job } from 'src/modules/job/domain/model/job/Job';
 
 @Controller('jobs')
 export class JobsController {
-  constructor(private readonly commandBus: CommandBus) {}
+  constructor(
+    private readonly commandBus: CommandBus,
+    private readonly queryBus: QueryBus,
+  ) {}
 
   @ApiBody({
     schema: {
@@ -76,39 +83,47 @@ export class JobsController {
   }
 
   @Get()
-  findAll(): JobList {
+  async findAll(): Promise<JobListView> {
     // @TODO use interceptor to serialize model into json
-    return initJobList([
-      initJob(
-        1,
-        'John Doe',
-        'Plumbing',
-        'Scheduled',
-        parseISO('2024-06-15T09:00:00Z'),
-        'Jane Smith',
+    const jobs = await this.queryBus.execute(new SearchJobsQuery());
+
+    return initJobListView(
+      jobs.map((job: Job) =>
+        // @TODO use serializer
+        initJobView(
+          job.id.toString(),
+          job.customerName.toString(),
+          job.type.toString(),
+          job.status.toString(),
+          job.appointmentDate.toString(),
+          job.technician.toString(),
+        ),
       ),
-      initJob(
-        2,
-        'Alice Johnson',
-        'Electrical',
-        'Completed',
-        parseISO('2024-05-20T14:00:00Z'),
-        'Bob Brown',
-      ),
-    ]);
+    );
   }
 
   @Get(':id')
-  find(@Param('id') id: number): Job {
+  async find(@Param('id') id: string): Promise<JobView> {
     // @TODO use interceptor to serialize model into json
-    return initJob(
-      id,
-      'John Doe',
-      'Plumbing',
-      'Scheduled',
-      parseISO('2024-06-15T09:00:00Z'),
-      'Jane Smith',
+    const maybeJob = await this.queryBus.execute(
+      new FindJobQuery(new JobId(id)),
     );
+
+    return maybeJob
+      .map((job: Job) =>
+        // @TODO use serializer
+        initJobView(
+          job.id.toString(),
+          job.customerName.toString(),
+          job.type.toString(),
+          job.status.toString(),
+          job.appointmentDate.toString(),
+          job.technician.toString(),
+        ),
+      )
+      .orDefaultLazy(() => {
+        throw new NotFoundException();
+      });
   }
 
   @ApiBody({

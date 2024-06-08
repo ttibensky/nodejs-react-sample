@@ -1,11 +1,8 @@
 import { ValueObject } from './ValueObject';
 
 export class NumericIdentifier extends ValueObject {
-  id: number;
-
-  constructor(id: number) {
+  constructor(private id: number) {
     super();
-    this.id = id;
     // @TODO validate
   }
 

@@ -6,26 +6,12 @@ import { JobCustomerName } from '../value-objects/JobCustomerName';
 import { JobId } from '../value-objects/JobId';
 
 export class CreateJobCommand {
-  id: JobId;
-  customerName: JobCustomerName;
-  type: JobType;
-  status: JobStatus;
-  appointmentDate: JobAppointmentDate;
-  technician: JobTechnician;
-
   constructor(
-    id: JobId,
-    customerName: JobCustomerName,
-    type: JobType,
-    status: JobStatus,
-    appointmentDate: JobAppointmentDate,
-    technician: JobTechnician,
-  ) {
-    this.id = id;
-    this.customerName = customerName;
-    this.type = type;
-    this.status = status;
-    this.appointmentDate = appointmentDate;
-    this.technician = technician;
-  }
+    public readonly id: JobId,
+    public readonly customerName: JobCustomerName,
+    public readonly type: JobType,
+    public readonly status: JobStatus,
+    public readonly appointmentDate: JobAppointmentDate,
+    public readonly technician: JobTechnician,
+  ) {}
 }

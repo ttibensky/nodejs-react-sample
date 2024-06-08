@@ -1,7 +1,5 @@
-import { formatISO } from 'date-fns';
-
-export type Job = {
-  id: number;
+export type JobView = {
+  id: string;
   customerName: string;
   jobType: string;
   status: string;
@@ -9,18 +7,18 @@ export type Job = {
   technician: string;
 };
 
-export const initJob = (
-  id: number,
+export const initJobView = (
+  id: string,
   customerName: string,
   jobType: string,
   status: string,
-  appointmentDate: Date,
+  appointmentDate: string,
   technician: string,
-): Job => ({
+): JobView => ({
   id,
   customerName,
   jobType,
   status,
-  appointmentDate: formatISO(appointmentDate),
+  appointmentDate,
   technician,
 });

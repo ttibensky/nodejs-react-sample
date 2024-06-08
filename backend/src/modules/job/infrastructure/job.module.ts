@@ -9,6 +9,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { MongooseJobs } from './domain/model/job/MongooseJobs';
 import { JobSchema } from './persistence/mongoose/schema/job.schema';
 import { Job } from '../domain/model/job/Job';
+import { SearchJobsQueryHandler } from '../application/handler/query/SearchJobsQueryHandler';
+import { FindJobQueryHandler } from '../application/handler/query/FindJobQueryHandler';
 
 @Module({
   imports: [
@@ -22,6 +24,7 @@ import { Job } from '../domain/model/job/Job';
       UpdateJobCommandHandler,
       DeleteJobCommandHandler,
     ],
+    ...[SearchJobsQueryHandler, FindJobQueryHandler],
     ...[
       {
         provide: Jobs,
