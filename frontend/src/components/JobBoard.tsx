@@ -1,4 +1,5 @@
 import JobRow from "./JobRow";
+import PrimaryButton from "./button/PrimaryButton";
 
 function JobBoard() {
   return (
@@ -8,7 +9,7 @@ function JobBoard() {
         <p>
           At the moment you can view, create, update and delete job postings.
         </p>
-        <button className="btn btn-primary mb-5">Create new job</button>
+        <PrimaryButton text="Create new job" className="mb-5" />
 
         <table className="table">
           <thead>

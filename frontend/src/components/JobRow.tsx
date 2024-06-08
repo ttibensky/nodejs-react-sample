@@ -1,3 +1,5 @@
+import SecondaryButton from "./button/SecondaryButton";
+
 function JobRow() {
   return (
     <>
@@ -8,8 +10,8 @@ function JobRow() {
         <td>2024-06-15T09:00:00Z</td>
         <td>Jane Smith</td>
         <td>
-          <button className="btn btn-sm btn-secondary me-1">Edit</button>
-          <button className="btn btn-sm btn-secondary">Delete</button>
+          <SecondaryButton text="Edit" className="me-1" />
+          <SecondaryButton text="Delete" className="btn-danger" />
         </td>
       </tr>
     </>
