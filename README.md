@@ -10,12 +10,14 @@ It utilizes:
 - [Domain-driven Design (DDD)](https://en.wikipedia.org/wiki/Domain-driven_design)
 - [Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software))
 - [Command and Query Responsibility Segregation (CQRS)](https://en.wikipedia.org/wiki/Command_Query_Responsibility_Segregation)
-- [value objects](https://en.wikipedia.org/wiki/Value_object)
+- [Value Objects](https://en.wikipedia.org/wiki/Value_object)
+- [Docker](https://www.docker.com/)
+- [Task](https://taskfile.dev/)
 
 ## Requirements
 
 - install Docker https://docs.docker.com/engine/install/
-- install Taskfile https://taskfile.dev/installation
+- install Task https://taskfile.dev/installation
 
 ## Start the project
 
@@ -25,8 +27,8 @@ It utilizes:
 
 ### Web & API
 
-- frontend http://localhost:3000
-- backend http://localhost:3001
+- Frontend http://localhost:3000
+- Backend http://localhost:3001
 - Swagger API documentation http://localhost:3001/api
 - Mongo Express http://localhost:8081
 
@@ -37,6 +39,8 @@ It utilizes:
 - correlation and causation ids
 - event sourcing
 - tests
+- graphql (as an alterantive to REST API)
+- websockets (for auto-updates after creating/updating/deleting a job)
 
 ## Resources
 
