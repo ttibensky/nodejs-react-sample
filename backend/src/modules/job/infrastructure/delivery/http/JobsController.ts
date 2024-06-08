@@ -59,12 +59,13 @@ export class JobsController {
   })
   @Post()
   @HttpCode(204)
-  async create(@Body() body: CreateJobCommandDTO) {
+  async create(@Body() body: CreateJobCommandDTO): Promise<void> {
     validateOrReject(body);
 
     await this.commandBus.execute(
       // use serializer to instantiate the command
       new CreateJobCommand(
+        JobId.generate(),
         new JobCustomerName(body.customerName),
         new JobType(body.jobType),
         new JobStatus(body.status),
@@ -139,7 +140,10 @@ export class JobsController {
   })
   @Put(':id')
   @HttpCode(204)
-  async update(@Param('id') id: number, @Body() body: UpdateJobCommandDTO) {
+  async update(
+    @Param('id') id: string,
+    @Body() body: UpdateJobCommandDTO,
+  ): Promise<void> {
     validateOrReject(body);
 
     await this.commandBus.execute(
@@ -157,7 +161,7 @@ export class JobsController {
 
   @Delete(':id')
   @HttpCode(204)
-  async remove(@Param('id') id: number) {
+  async remove(@Param('id') id: string): Promise<void> {
     await this.commandBus.execute(
       // use serializer to instantiate the command
       new DeleteJobCommand(new JobId(id)),

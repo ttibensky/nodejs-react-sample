@@ -17,7 +17,7 @@ export class UpdateJobCommand extends BaseCommand {
   constructor(
     id: JobId,
     customerName: JobCustomerName,
-    jobType: JobType,
+    type: JobType,
     status: JobStatus,
     appointmentDate: JobAppointmentDate,
     technician: JobTechnician,
@@ -25,7 +25,7 @@ export class UpdateJobCommand extends BaseCommand {
     super();
     this.id = id;
     this.customerName = customerName;
-    this.type = jobType;
+    this.type = type;
     this.status = status;
     this.appointmentDate = appointmentDate;
     this.technician = technician;

@@ -1,9 +1,31 @@
 services:
   backend:
     image: node:20.14.0-alpine3.19
+    restart: always
     command: sh -c 'npm i && npm run start:dev'
     working_dir: /app
     volumes:
       - ./backend:/app
     ports:
       - 3001:3000
+
+  mongo:
+    image: mongo:5.0.27-focal
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: wVKi6FaX
+    volumes:
+      - ./mongo/data:/data/db
+      - ./mongo/init:/docker-entrypoint-initdb.d/
+
+  mongo-express:
+    image: mongo-express:1.0.2-20-alpine3.19
+    restart: always
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: wVKi6FaX
+      ME_CONFIG_MONGODB_URL: mongodb://root:wVKi6FaX@mongo:27017/
+      ME_CONFIG_BASICAUTH: false
+    ports:
+      - 8081:8081

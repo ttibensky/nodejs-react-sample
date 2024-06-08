@@ -3,8 +3,10 @@ import { JobStatus } from '../value-objects/JobStatus';
 import { JobAppointmentDate } from '../value-objects/JobAppointmentDate';
 import { JobTechnician } from '../value-objects/JobTechnician';
 import { JobCustomerName } from '../value-objects/JobCustomerName';
+import { JobId } from '../value-objects/JobId';
 
 export class CreateJobCommand {
+  id: JobId;
   customerName: JobCustomerName;
   type: JobType;
   status: JobStatus;
@@ -12,14 +14,16 @@ export class CreateJobCommand {
   technician: JobTechnician;
 
   constructor(
+    id: JobId,
     customerName: JobCustomerName,
-    jobType: JobType,
+    type: JobType,
     status: JobStatus,
     appointmentDate: JobAppointmentDate,
     technician: JobTechnician,
   ) {
+    this.id = id;
     this.customerName = customerName;
-    this.type = jobType;
+    this.type = type;
     this.status = status;
     this.appointmentDate = appointmentDate;
     this.technician = technician;
