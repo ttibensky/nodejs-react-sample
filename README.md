@@ -3,16 +3,27 @@
 This repository is a showcase of various technologies, architectonal principles and libraries.
 It utilizes:
 
-- [JavaScript](https://javascript.info/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Nest.js](nestjs.com)
-- [React.js](https://react.dev/)
-- [Domain-driven Design (DDD)](https://en.wikipedia.org/wiki/Domain-driven_design)
-- [Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software))
-- [Command and Query Responsibility Segregation (CQRS)](https://en.wikipedia.org/wiki/Command_Query_Responsibility_Segregation)
-- [Value Objects](https://en.wikipedia.org/wiki/Value_object)
-- [Docker](https://www.docker.com/)
-- [Task](https://taskfile.dev/)
+- languages:
+  - [JavaScript](https://javascript.info/)
+  - [TypeScript](https://www.typescriptlang.org/)
+- frameworks
+  - [Nest.js](nestjs.com)
+  - [React.js](https://react.dev/)
+- principles:
+  - [Domain-driven Design (DDD)](https://en.wikipedia.org/wiki/Domain-driven_design)
+  - [Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software))
+  - [Command and Query Responsibility Segregation (CQRS)](https://en.wikipedia.org/wiki/Command_Query_Responsibility_Segregation)
+  - [Value Objects](https://en.wikipedia.org/wiki/Value_object)
+- libraries:
+  - `@nestjs/mongoose` and `mongoose` as an ODM for storing and retrieving data
+  - `@nestjs/swagger` to generate API documentation from the code
+  - `class-validator` to validate requests/user inputs before the data goes to the controllers
+  - `date-fns` to make work with dates easier
+  - `purify-ts` to provide a funcional (and more readable) way of handling and avoiding null values and nested conditions
+  - `uuid` to generate IDs and primary keys for entities, commands, events and queries
+- command line utilities:
+  - [Docker](https://www.docker.com/)
+  - [Task](https://taskfile.dev/)
 
 ## Requirements
 
