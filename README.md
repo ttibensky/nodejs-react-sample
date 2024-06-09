@@ -7,8 +7,8 @@ It utilizes:
   - [JavaScript](https://javascript.info/)
   - [TypeScript](https://www.typescriptlang.org/)
 - frameworks
-  - [Nest.js](nestjs.com) for easier development
-  - [React.js](https://react.dev/)
+  - [Nest.js](nestjs.com) because it has all the functionality we need, is fast, and well documented
+  - [React.js](https://react.dev/) because it is one of the most widely used frontend frameworks and most companies requires to have experience with it
   - [Vite](https://vitejs.dev/) for fast build, project startup and updates
 - architecture:
   - [Domain-driven Design (DDD)](https://en.wikipedia.org/wiki/Domain-driven_design) to separate business logic from framework and libraries, improve readability, extendability and maintainability, and to enforce [SOLID principles](https://en.wikipedia.org/wiki/SOLID)
