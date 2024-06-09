@@ -1,13 +1,18 @@
 import { Button } from "react-bootstrap";
+import { Job } from "../types/Job";
 
-function JobBoardRow() {
+type P = {
+  job: Job;
+};
+
+function JobBoardRow({ job }: P) {
   return (
     <tr>
-      <td>John Doe</td>
-      <td>Plumbing</td>
-      <td>Scheduled</td>
-      <td>2024-06-15T09:00:00Z</td>
-      <td>Jane Smith</td>
+      <td>{job.customerName}</td>
+      <td>{job.type}</td>
+      <td>{job.status}</td>
+      <td>{job.appointmentDate}</td>
+      <td>{job.technician}</td>
       <td>
         <Button variant="secondary" className="me-1">
           Show

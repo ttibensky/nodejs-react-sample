@@ -7,6 +7,7 @@ import Modal from "react-bootstrap/Modal";
 type P = {
   show: boolean;
   setShow: CallableFunction;
+  fetchJobs: CallableFunction;
 };
 
 type Job = {
@@ -17,21 +18,25 @@ type Job = {
   technician: string;
 };
 
-function JobCreateModal({ show, setShow }: P) {
-  const [job, setValue] = useState<Job>({
+function JobCreateModal({ show, setShow, fetchJobs }: P) {
+  const defaultJob = {
     customerName: "",
     type: "Plumbing",
     status: "Scheduled",
     appointmentDate: formatISO(new Date()),
     technician: "",
-  });
+  };
+
+  const [job, setJob] = useState<Job>(defaultJob);
 
   const handleClose = () => setShow(false);
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     // @TODO validation
     try {
-      await axios.post("http://localhost:3001/jobs", job);
+      await axios.post("http://localhost:3001/jobs", job); // @TODO move to .env
+      setJob(defaultJob);
+      fetchJobs();
       handleClose();
       // @TODO display success message
     } catch (error) {
@@ -54,7 +59,7 @@ function JobCreateModal({ show, setShow }: P) {
               name="customerName"
               placeholder="John Doe"
               onChange={(e: BaseSyntheticEvent) =>
-                setValue({ ...job, customerName: e.target.value })
+                setJob({ ...job, customerName: e.target.value })
               }
               value={job.customerName}
               autoFocus
@@ -67,7 +72,7 @@ function JobCreateModal({ show, setShow }: P) {
               className="mb-3"
               aria-label="Type"
               onChange={(e: BaseSyntheticEvent) =>
-                setValue({ ...job, type: e.target.value })
+                setJob({ ...job, type: e.target.value })
               }
               value={job.type}
             >
@@ -83,7 +88,7 @@ function JobCreateModal({ show, setShow }: P) {
               className="mb-3"
               aria-label="Status"
               onChange={(e: BaseSyntheticEvent) =>
-                setValue({ ...job, status: e.target.value })
+                setJob({ ...job, status: e.target.value })
               }
               value={job.status}
             >
@@ -99,7 +104,7 @@ function JobCreateModal({ show, setShow }: P) {
               name="appointmentDate"
               placeholder="2024-06-15T09:00:00Z"
               onChange={(e: BaseSyntheticEvent) =>
-                setValue({ ...job, appointmentDate: formatISO(e.target.value) })
+                setJob({ ...job, appointmentDate: formatISO(e.target.value) })
               }
               value={format(job.appointmentDate, "yyyy-MM-dd'T'hh:mm")}
               autoFocus
@@ -112,7 +117,7 @@ function JobCreateModal({ show, setShow }: P) {
               name="technician"
               placeholder="Jane Smith"
               onChange={(e: BaseSyntheticEvent) =>
-                setValue({ ...job, technician: e.target.value })
+                setJob({ ...job, technician: e.target.value })
               }
               value={job.technician}
               autoFocus

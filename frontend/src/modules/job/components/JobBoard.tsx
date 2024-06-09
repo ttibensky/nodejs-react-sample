@@ -1,7 +1,26 @@
+import { useCallback, useEffect, useState } from "react";
 import JobBoardRow from "./JobBoardRow";
 import JobCreateModal from "./JobCreateButton";
+import axios from "axios";
+import { Job } from "../types/Job";
 
 function JobBoard() {
+  const [jobs, setJobs] = useState<Job[]>([]);
+
+  const fetchJobs = useCallback(async () => {
+    try {
+      const response = await axios.get("http://localhost:3001/jobs");
+      setJobs(response.data.jobs);
+    } catch (error) {
+      console.error("Error fetching jobs:", error);
+    }
+  }, []);
+
+  // @TODO fix useEffect being called twice
+  useEffect(() => {
+    fetchJobs();
+  }, [fetchJobs]);
+
   return (
     <>
       <div className="container py-4 px-3 mx-auto mb-4">
@@ -9,7 +28,7 @@ function JobBoard() {
         <p>
           At the moment you can view, create, update and delete job postings.
         </p>
-        <JobCreateModal className="mb-5" />
+        <JobCreateModal className="mb-5" fetchJobs={fetchJobs} />
 
         <table className="table">
           <thead>
@@ -23,13 +42,9 @@ function JobBoard() {
             </tr>
           </thead>
           <tbody className="table-group-divider">
-            <JobBoardRow />
-            <JobBoardRow />
-            <JobBoardRow />
-            <JobBoardRow />
-            <JobBoardRow />
-            <JobBoardRow />
-            <JobBoardRow />
+            {jobs.map((job) => (
+              <JobBoardRow key={job.id} job={job} />
+            ))}
           </tbody>
         </table>
       </div>

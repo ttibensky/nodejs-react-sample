@@ -1,7 +1,7 @@
 export type JobView = {
   id: string;
   customerName: string;
-  jobType: string;
+  type: string;
   status: string;
   appointmentDate: string;
   technician: string;
@@ -10,14 +10,14 @@ export type JobView = {
 export const initJobView = (
   id: string,
   customerName: string,
-  jobType: string,
+  type: string,
   status: string,
   appointmentDate: string,
   technician: string,
 ): JobView => ({
   id,
   customerName,
-  jobType,
+  type,
   status,
   appointmentDate,
   technician,

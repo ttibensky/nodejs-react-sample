@@ -22,6 +22,7 @@ It utilizes:
   - `date-fns` to make work with dates easier
   - `purify-ts` to provide a funcional (and more readable) way of handling and avoiding null values and nested conditions
   - `uuid` to generate IDs and primary keys for entities, commands, events and queries
+  - `Bootstrap` and `React Bootstrap` UI kit, so we don't have to write our own components
 - command line utilities:
   - [Docker](https://www.docker.com/) for stable environment
   - [Task](https://taskfile.dev/) for easier command line usage
@@ -53,6 +54,7 @@ It utilizes:
 - tests
 - graphql (as an alterantive to REST API)
 - websockets (for auto-updates after creating/updating/deleting a job)
+- add [React Query](https://tanstack.com/query/v3) for better state management (refresh job board list after create/update/delete)
 
 ## Resources
 
