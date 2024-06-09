@@ -1,5 +1,5 @@
 import { format, formatISO } from "date-fns";
-import { BaseSyntheticEvent } from "react";
+import { BaseSyntheticEvent, useState } from "react";
 import { Form } from "react-bootstrap";
 import { FormJob } from "../../types/FormJob";
 
@@ -11,11 +11,21 @@ type P = {
 };
 
 function JobForm({ formId, formJob, setJob, handleSubmit }: P) {
+  const [validated, setValidated] = useState(false);
+
   return (
     <Form
+      noValidate
       id={formId}
-      onSubmit={() => {
-        handleSubmit();
+      validated={validated}
+      onSubmit={(e: BaseSyntheticEvent) => {
+        e.preventDefault();
+        setValidated(true);
+
+        const form = e.currentTarget;
+        if (form.checkValidity() === true) {
+          handleSubmit();
+        }
       }}
     >
       <Form.Group className="mb-3">
@@ -29,7 +39,11 @@ function JobForm({ formId, formJob, setJob, handleSubmit }: P) {
           }
           value={formJob.customerName}
           autoFocus
+          required
         />
+        <Form.Control.Feedback type="invalid">
+          Customer Name is required.
+        </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group className="mb-3">
@@ -42,11 +56,15 @@ function JobForm({ formId, formJob, setJob, handleSubmit }: P) {
             setJob({ ...formJob, type: e.target.value })
           }
           value={formJob.type}
+          required
         >
           <option value="Plumbing">Plumbing</option>
           <option value="Heating">Heating</option>
           <option value="Electrical">Electrical</option>
         </Form.Select>
+        <Form.Control.Feedback type="invalid">
+          Type is required.
+        </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group className="mb-3">
@@ -59,11 +77,15 @@ function JobForm({ formId, formJob, setJob, handleSubmit }: P) {
             setJob({ ...formJob, status: e.target.value })
           }
           value={formJob.status}
+          required
         >
           <option value="Scheduled">Scheduled</option>
           <option value="Completed">Completed</option>
           <option value="Canceled">Canceled</option>
         </Form.Select>
+        <Form.Control.Feedback type="invalid">
+          Status is required.
+        </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group className="mb-3">
@@ -77,7 +99,11 @@ function JobForm({ formId, formJob, setJob, handleSubmit }: P) {
           }
           value={format(formJob.appointmentDate, "yyyy-MM-dd'T'hh:mm")}
           autoFocus
+          required
         />
+        <Form.Control.Feedback type="invalid">
+          Appointment Date is required.
+        </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group className="mb-3">
@@ -91,7 +117,11 @@ function JobForm({ formId, formJob, setJob, handleSubmit }: P) {
           }
           value={formJob.technician}
           autoFocus
+          required
         />
+        <Form.Control.Feedback type="invalid">
+          Technician is required.
+        </Form.Control.Feedback>
       </Form.Group>
     </Form>
   );

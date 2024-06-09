@@ -39,6 +39,7 @@ function JobEditModal({ job, show, setShow }: P) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
       handleClose();
+      setFormJob(defaultJob);
       // @TODO toast
     },
     onError: () => {
