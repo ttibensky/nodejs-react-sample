@@ -1,4 +1,4 @@
-import JobBoard from "./components/JobBoard";
+import JobBoard from "./modules/job/JobBoard";
 
 function App() {
   return (

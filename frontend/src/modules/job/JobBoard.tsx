@@ -1,5 +1,5 @@
-import JobRow from "./JobRow";
-import PrimaryButton from "./button/PrimaryButton";
+import JobBoardRow from "./JobBoardRow";
+import JobCreateModal from "./JobCreateButton";
 
 function JobBoard() {
   return (
@@ -9,7 +9,7 @@ function JobBoard() {
         <p>
           At the moment you can view, create, update and delete job postings.
         </p>
-        <PrimaryButton text="Create new job" className="mb-5" />
+        <JobCreateModal className="mb-5" />
 
         <table className="table">
           <thead>
@@ -23,13 +23,13 @@ function JobBoard() {
             </tr>
           </thead>
           <tbody className="table-group-divider">
-            <JobRow />
-            <JobRow />
-            <JobRow />
-            <JobRow />
-            <JobRow />
-            <JobRow />
-            <JobRow />
+            <JobBoardRow />
+            <JobBoardRow />
+            <JobBoardRow />
+            <JobBoardRow />
+            <JobBoardRow />
+            <JobBoardRow />
+            <JobBoardRow />
           </tbody>
         </table>
       </div>

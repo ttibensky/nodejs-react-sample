@@ -44,7 +44,7 @@ export class JobsController {
           type: 'string',
           example: 'John Doe',
         },
-        jobType: {
+        type: {
           type: 'string',
           example: 'Plumbing',
         },
@@ -73,7 +73,7 @@ export class JobsController {
       new CreateJobCommand(
         JobId.generate(),
         new JobCustomerName(body.customerName),
-        new JobType(body.jobType),
+        new JobType(body.type),
         new JobStatus(body.status),
         JobAppointmentDate.fromString(body.appointmentDate),
         new JobTechnician(body.technician),
@@ -133,7 +133,7 @@ export class JobsController {
           type: 'string',
           example: 'John Doe',
         },
-        jobType: {
+        type: {
           type: 'string',
           example: 'Plumbing',
         },
@@ -165,7 +165,7 @@ export class JobsController {
       new UpdateJobCommand(
         new JobId(id),
         new JobCustomerName(body.customerName),
-        new JobType(body.jobType),
+        new JobType(body.type),
         new JobStatus(body.status),
         JobAppointmentDate.fromString(body.appointmentDate),
         new JobTechnician(body.technician),
