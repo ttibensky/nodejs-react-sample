@@ -40,6 +40,8 @@ It utilizes:
 ## Start the project
 
 - run `task up`
+  - this will spin up all docker containers, imports database seed, runs `npm i`, so it might take a minute or two
+  - if you wish to see the progess, run `taks logs` or tail logs of specific containers until everything is ready
 
 ## Usage
 
