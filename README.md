@@ -29,7 +29,7 @@ It utilizes:
   - [Docker](https://www.docker.com/) for stable environment
   - [Task](https://taskfile.dev/) for easier command line usage
 
-![App Screenshot](./docs/screenshot.png)
+![App Screencast](./docs/nodejs-react-sample-app.gif)
 
 ## Requirements
 
