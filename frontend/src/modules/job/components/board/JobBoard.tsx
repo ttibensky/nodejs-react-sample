@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import JobBoardRow from "./JobBoardRow";
-import JobCreateModal from "./JobCreateButton";
+import JobCreateModal from "../create/JobCreateButton";
 import axios from "axios";
-import { Job } from "../types/Job";
+import { Job } from "../../types/Job";
 
 function JobBoard() {
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -30,7 +30,7 @@ function JobBoard() {
         </p>
         <JobCreateModal className="mb-5" fetchJobs={fetchJobs} />
 
-        <table className="table">
+        <table className="table table-striped table-hover">
           <thead>
             <tr>
               <th scope="col">Customer</th>
@@ -43,7 +43,7 @@ function JobBoard() {
           </thead>
           <tbody className="table-group-divider">
             {jobs.map((job) => (
-              <JobBoardRow key={job.id} job={job} />
+              <JobBoardRow key={job.id} job={job} fetchJobs={fetchJobs} />
             ))}
           </tbody>
         </table>
