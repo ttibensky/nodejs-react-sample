@@ -45,10 +45,9 @@ It utilizes:
 
 - run `task down up logs` to restart the project and start tailing logs from all containers
 
-### Web & API
+### Web, API, Mongo Express
 
 - Frontend [http://localhost:3000](http://localhost:3000)
-- Backend [http://localhost:3001](http://localhost:3001)
 - Swagger API documentation [http://localhost:3001/api](http://localhost:3001/api)
 - Mongo Express [http://localhost:8081](http://localhost:8081)
 
