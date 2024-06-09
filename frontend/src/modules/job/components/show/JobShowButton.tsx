@@ -1,14 +1,13 @@
 import { Button } from "react-bootstrap";
 import { useState } from "react";
-import { Job } from "../../types/Job";
 import JobShowModal from "./JobShowModal";
 
 type P = {
-  job: Job;
+  jobId: string;
   className?: string;
 };
 
-function JobShowButton({ job, className = "" }: P) {
+function JobShowButton({ jobId, className = "" }: P) {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
 
@@ -18,7 +17,7 @@ function JobShowButton({ job, className = "" }: P) {
         Show
       </Button>
 
-      <JobShowModal job={job} show={show} setShow={setShow} />
+      <JobShowModal jobId={jobId} show={show} setShow={setShow} />
     </>
   );
 }

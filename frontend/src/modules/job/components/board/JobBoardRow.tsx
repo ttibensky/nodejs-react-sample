@@ -17,7 +17,7 @@ function JobBoardRow({ job }: P) {
       <td>{format(job.appointmentDate, "yyyy-MM-dd' at 'hh:mm")}</td>
       <td>{job.technician}</td>
       <td>
-        <JobShowButton className="btn-sm me-1" job={job} />
+        <JobShowButton className="btn-sm me-1" jobId={job.id} />
         <JobEditButton className="btn-sm me-1" job={job} />
         <JobDeleteButton className="btn-sm" job={job} />
       </td>

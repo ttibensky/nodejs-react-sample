@@ -13,7 +13,7 @@ function JobBoardTable() {
       ),
   });
 
-  if (error) return ""; // @TODO toast
+  if (error) return "Something went wrong."; // @TODO toast
 
   const jobs = data?.jobs ?? [];
 

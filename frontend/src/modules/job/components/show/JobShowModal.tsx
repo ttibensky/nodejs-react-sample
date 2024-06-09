@@ -1,17 +1,33 @@
 import Modal from "react-bootstrap/Modal";
 import { Job } from "../../types/Job";
 import { format } from "date-fns";
+import { useQuery } from "@tanstack/react-query";
 
 type P = {
-  job: Job;
+  jobId: string;
   show: boolean;
   setShow: CallableFunction;
 };
 
-function JobShowModal({ job, show, setShow }: P) {
+function JobShowModal({ jobId, show, setShow }: P) {
   const handleClose = () => setShow(false);
 
-  return (
+  const {
+    isFetching,
+    error,
+    data: job,
+  } = useQuery<Job>({
+    queryKey: ["job"],
+    queryFn: () =>
+      fetch(`${import.meta.env.VITE_BACKEND_BASE_URL}/jobs/${jobId}`).then(
+        (res) => res.json()
+      ),
+    enabled: show,
+  });
+
+  if (error) return "Something went wrong."; // @TODO toast
+
+  return job !== undefined ? (
     <Modal show={show} onHide={handleClose} size="lg">
       <Modal.Header closeButton>
         <Modal.Title>
@@ -49,7 +65,9 @@ function JobShowModal({ job, show, setShow }: P) {
         </div>
       </Modal.Body>
     </Modal>
-  );
+  ) : isFetching ? (
+    <>fetching...</>
+  ) : null;
 }
 
 export default JobShowModal;
