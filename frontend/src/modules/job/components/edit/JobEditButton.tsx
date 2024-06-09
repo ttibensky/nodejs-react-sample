@@ -6,10 +6,9 @@ import { Job } from "../../types/Job";
 type P = {
   job: Job;
   className?: string;
-  fetchJobs: CallableFunction;
 };
 
-function JobEditButton({ job, fetchJobs, className = "" }: P) {
+function JobEditButton({ job, className = "" }: P) {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
 
@@ -19,12 +18,7 @@ function JobEditButton({ job, fetchJobs, className = "" }: P) {
         Edit
       </Button>
 
-      <JobEditModal
-        job={job}
-        show={show}
-        setShow={setShow}
-        fetchJobs={fetchJobs}
-      />
+      <JobEditModal job={job} show={show} setShow={setShow} />
     </>
   );
 }

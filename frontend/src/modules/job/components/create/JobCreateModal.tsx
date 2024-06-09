@@ -1,14 +1,14 @@
 import axios from "axios";
 import { formatISO } from "date-fns";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import JobForm from "../common/JobForm";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type P = {
   show: boolean;
   setShow: CallableFunction;
-  fetchJobs: CallableFunction;
 };
 
 type FormJob = {
@@ -19,7 +19,7 @@ type FormJob = {
   technician: string;
 };
 
-function JobCreateModal({ show, setShow, fetchJobs }: P) {
+function JobCreateModal({ show, setShow }: P) {
   const defaultJob: FormJob = {
     customerName: "",
     type: "Plumbing",
@@ -29,25 +29,27 @@ function JobCreateModal({ show, setShow, fetchJobs }: P) {
   };
 
   const formId = "jobCreateForm";
-  const [formJob, setJob] = useState<FormJob>(defaultJob);
+  const [formJob, setFormJob] = useState<FormJob>(defaultJob);
 
   const handleClose = () => setShow(false);
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    // @TODO validation
-    try {
-      await axios.post(
+
+  const queryClient = useQueryClient();
+  const { mutate: createJob } = useMutation({
+    mutationFn: (formJob: FormJob) => {
+      return axios.post(
         `${import.meta.env.VITE_BACKEND_BASE_URL}/jobs`,
         formJob
       );
-      setJob(defaultJob);
-      fetchJobs();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
       handleClose();
-      // @TODO display success message
-    } catch (error) {
-      // @TODO display error message
-    }
-  };
+      // @TODO toast
+    },
+    onError: () => {
+      // @TODO toast
+    },
+  });
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -57,10 +59,10 @@ function JobCreateModal({ show, setShow, fetchJobs }: P) {
 
       <Modal.Body>
         <JobForm
-          id={formId}
-          job={formJob}
-          setJob={setJob}
-          handleSubmit={handleSubmit}
+          formId={formId}
+          formJob={formJob}
+          setJob={setFormJob}
+          handleSubmit={() => createJob(formJob)}
         />
       </Modal.Body>
 

@@ -1,8 +1,11 @@
 import JobBoard from "./modules/job/components/board/JobBoard";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div>
+    <QueryClientProvider client={queryClient}>
       <div className="container">
         <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
           <a
@@ -65,7 +68,7 @@ function App() {
           </footer>
         </div>
       </div>
-    </div>
+    </QueryClientProvider>
   );
 }
 

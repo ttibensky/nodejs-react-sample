@@ -5,10 +5,9 @@ import JobShowButton from "../show/JobShowButton";
 
 type P = {
   job: Job;
-  fetchJobs: CallableFunction;
 };
 
-function JobBoardRow({ job, fetchJobs }: P) {
+function JobBoardRow({ job }: P) {
   return (
     <tr>
       <td>{job.customerName}</td>
@@ -17,9 +16,9 @@ function JobBoardRow({ job, fetchJobs }: P) {
       <td>{job.appointmentDate}</td>
       <td>{job.technician}</td>
       <td>
-        <JobShowButton className="me-1" job={job} />
-        <JobEditButton className="me-1" job={job} fetchJobs={fetchJobs} />
-        <JobDeleteButton job={job} fetchJobs={fetchJobs} />
+        <JobShowButton className="btn-sm me-1" job={job} />
+        <JobEditButton className="btn-sm me-1" job={job} />
+        <JobDeleteButton className="btn-sm" job={job} />
       </td>
     </tr>
   );

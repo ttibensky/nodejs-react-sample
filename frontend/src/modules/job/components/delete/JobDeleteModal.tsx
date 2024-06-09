@@ -1,33 +1,35 @@
 import axios from "axios";
-import { SyntheticEvent } from "react";
 import { Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import { Job } from "../../types/Job";
 import { format } from "date-fns";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type P = {
   job: Job;
   show: boolean;
   setShow: CallableFunction;
-  fetchJobs: CallableFunction;
 };
 
-function JobDeleteModal({ job, show, setShow, fetchJobs }: P) {
+function JobDeleteModal({ job, show, setShow }: P) {
   const handleClose = () => setShow(false);
-  const handleSubmit = async (e: SyntheticEvent) => {
-    e.preventDefault();
-    // @TODO validation
-    try {
-      await axios.delete(
+
+  const queryClient = useQueryClient();
+  const { mutate: deleteJob } = useMutation({
+    mutationFn: (job: Job) => {
+      return axios.delete(
         `${import.meta.env.VITE_BACKEND_BASE_URL}/jobs/${job.id}`
       );
-      fetchJobs();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
       handleClose();
-      // @TODO display success message
-    } catch (error) {
-      // @TODO display error message
-    }
-  };
+      // @TODO toast
+    },
+    onError: () => {
+      // @TODO toast
+    },
+  });
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -47,7 +49,7 @@ function JobDeleteModal({ job, show, setShow, fetchJobs }: P) {
         <Button variant="secondary" onClick={handleClose}>
           Cancel
         </Button>
-        <Button variant="danger" onClick={handleSubmit}>
+        <Button variant="danger" onClick={() => deleteJob(job)}>
           Yes, Delete the job
         </Button>
       </Modal.Footer>

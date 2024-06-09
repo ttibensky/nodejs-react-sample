@@ -4,10 +4,9 @@ import { useState } from "react";
 
 type P = {
   className?: string;
-  fetchJobs: CallableFunction;
 };
 
-function JobCreateButton({ fetchJobs, className = "" }: P) {
+function JobCreateButton({ className = "" }: P) {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
 
@@ -17,7 +16,7 @@ function JobCreateButton({ fetchJobs, className = "" }: P) {
         Create new job
       </Button>
 
-      <JobCreateModal show={show} setShow={setShow} fetchJobs={fetchJobs} />
+      <JobCreateModal show={show} setShow={setShow} />
     </>
   );
 }

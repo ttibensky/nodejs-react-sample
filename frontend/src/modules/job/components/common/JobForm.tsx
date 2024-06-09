@@ -1,25 +1,23 @@
 import { format, formatISO } from "date-fns";
-import { BaseSyntheticEvent, FormEvent } from "react";
+import { BaseSyntheticEvent } from "react";
 import { Form } from "react-bootstrap";
+import { FormJob } from "../../types/FormJob";
 
 type P = {
-  id: string;
-  job: Job;
-  setJob: React.Dispatch<React.SetStateAction<Job>>;
-  handleSubmit: (e: FormEvent) => Promise<void>;
+  formId: string;
+  formJob: FormJob;
+  setJob: React.Dispatch<React.SetStateAction<FormJob>>;
+  handleSubmit: CallableFunction;
 };
 
-type Job = {
-  customerName: string;
-  type: string;
-  status: string;
-  appointmentDate: string;
-  technician: string;
-};
-
-function JobForm({ id, job, setJob, handleSubmit }: P) {
+function JobForm({ formId, formJob, setJob, handleSubmit }: P) {
   return (
-    <Form id={id} onSubmit={handleSubmit}>
+    <Form
+      id={formId}
+      onSubmit={() => {
+        handleSubmit();
+      }}
+    >
       <Form.Group className="mb-3">
         <Form.Label>Customer</Form.Label>
         <Form.Control
@@ -27,9 +25,9 @@ function JobForm({ id, job, setJob, handleSubmit }: P) {
           name="customerName"
           placeholder="John Doe"
           onChange={(e: BaseSyntheticEvent) =>
-            setJob({ ...job, customerName: e.target.value })
+            setJob({ ...formJob, customerName: e.target.value })
           }
-          value={job.customerName}
+          value={formJob.customerName}
           autoFocus
         />
       </Form.Group>
@@ -41,9 +39,9 @@ function JobForm({ id, job, setJob, handleSubmit }: P) {
           className="mb-3"
           aria-label="Type"
           onChange={(e: BaseSyntheticEvent) =>
-            setJob({ ...job, type: e.target.value })
+            setJob({ ...formJob, type: e.target.value })
           }
-          value={job.type}
+          value={formJob.type}
         >
           <option value="Plumbing">Plumbing</option>
           <option value="Heating">Heating</option>
@@ -58,9 +56,9 @@ function JobForm({ id, job, setJob, handleSubmit }: P) {
           className="mb-3"
           aria-label="Status"
           onChange={(e: BaseSyntheticEvent) =>
-            setJob({ ...job, status: e.target.value })
+            setJob({ ...formJob, status: e.target.value })
           }
-          value={job.status}
+          value={formJob.status}
         >
           <option value="Scheduled">Scheduled</option>
           <option value="Done">Done</option>
@@ -75,9 +73,9 @@ function JobForm({ id, job, setJob, handleSubmit }: P) {
           name="appointmentDate"
           placeholder="2024-06-15T09:00:00Z"
           onChange={(e: BaseSyntheticEvent) =>
-            setJob({ ...job, appointmentDate: formatISO(e.target.value) })
+            setJob({ ...formJob, appointmentDate: formatISO(e.target.value) })
           }
-          value={format(job.appointmentDate, "yyyy-MM-dd'T'hh:mm")}
+          value={format(formJob.appointmentDate, "yyyy-MM-dd'T'hh:mm")}
           autoFocus
         />
       </Form.Group>
@@ -89,9 +87,9 @@ function JobForm({ id, job, setJob, handleSubmit }: P) {
           name="technician"
           placeholder="Jane Smith"
           onChange={(e: BaseSyntheticEvent) =>
-            setJob({ ...job, technician: e.target.value })
+            setJob({ ...formJob, technician: e.target.value })
           }
-          value={job.technician}
+          value={formJob.technician}
           autoFocus
         />
       </Form.Group>

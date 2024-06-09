@@ -1,27 +1,20 @@
 import axios from "axios";
 import { formatISO } from "date-fns";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import JobForm from "../common/JobForm";
 import { Job } from "../../types/Job";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { FormJob } from "../../types/FormJob";
 
 type P = {
   job: Job;
   show: boolean;
   setShow: CallableFunction;
-  fetchJobs: CallableFunction;
 };
 
-type FormJob = {
-  customerName: string;
-  type: string;
-  status: string;
-  appointmentDate: string;
-  technician: string;
-};
-
-function JobEditModal({ job, show, setShow, fetchJobs }: P) {
+function JobEditModal({ job, show, setShow }: P) {
   const defaultJob: FormJob = {
     customerName: job.customerName,
     type: job.type,
@@ -31,25 +24,27 @@ function JobEditModal({ job, show, setShow, fetchJobs }: P) {
   };
 
   const formId = "jobEditForm";
-  const [formJob, setJob] = useState<FormJob>(defaultJob);
+  const [formJob, setFormJob] = useState<FormJob>(defaultJob);
 
   const handleClose = () => setShow(false);
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    // @TODO validation
-    try {
-      await axios.put(
-        `${import.meta.env.VITE_BACKEND_BASE_URL}/jobs/${job.id}`,
+
+  const queryClient = useQueryClient();
+  const { mutate: editJob } = useMutation({
+    mutationFn: ({ jobId, formJob }: { jobId: string; formJob: FormJob }) => {
+      return axios.put(
+        `${import.meta.env.VITE_BACKEND_BASE_URL}/jobs/${jobId}`,
         formJob
       );
-      setJob(defaultJob);
-      fetchJobs();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
       handleClose();
-      // @TODO display success message
-    } catch (error) {
-      // @TODO display error message
-    }
-  };
+      // @TODO toast
+    },
+    onError: () => {
+      // @TODO toast
+    },
+  });
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -59,10 +54,10 @@ function JobEditModal({ job, show, setShow, fetchJobs }: P) {
 
       <Modal.Body>
         <JobForm
-          id={formId}
-          job={formJob}
-          setJob={setJob}
-          handleSubmit={handleSubmit}
+          formId={formId}
+          formJob={formJob}
+          setJob={setFormJob}
+          handleSubmit={() => editJob({ jobId: job.id, formJob })}
         />
       </Modal.Body>
 

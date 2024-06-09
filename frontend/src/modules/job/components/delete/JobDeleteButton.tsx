@@ -6,10 +6,9 @@ import JobDeleteModal from "./JobDeleteModal";
 type P = {
   job: Job;
   className?: string;
-  fetchJobs: CallableFunction;
 };
 
-function JobDeleteButton({ job, fetchJobs, className = "" }: P) {
+function JobDeleteButton({ job, className = "" }: P) {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
 
@@ -19,12 +18,7 @@ function JobDeleteButton({ job, fetchJobs, className = "" }: P) {
         Delete
       </Button>
 
-      <JobDeleteModal
-        job={job}
-        show={show}
-        setShow={setShow}
-        fetchJobs={fetchJobs}
-      />
+      <JobDeleteModal job={job} show={show} setShow={setShow} />
     </>
   );
 }
