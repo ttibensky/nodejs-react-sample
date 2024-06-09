@@ -2,7 +2,7 @@ import JobBoard from "./modules/job/components/board/JobBoard";
 
 function App() {
   return (
-    <>
+    <div>
       <div className="container">
         <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
           <a
@@ -19,14 +19,22 @@ function App() {
               </a>
             </li>
             <li className="nav-item">
-              <span className="nav-link" title="Comming soon">
-                Features
-              </span>
+              <a
+                className="nav-link"
+                href="https://github.com/ttibensky/nodejs-react-sample"
+                target="_blank"
+              >
+                Github Repo
+              </a>
             </li>
             <li className="nav-item">
-              <span className="nav-link" title="Comming soon">
-                About
-              </span>
+              <a
+                className="nav-link"
+                href="https://www.linkedin.com/in/tomastibensky/"
+                target="_blank"
+              >
+                About Author
+              </a>
             </li>
           </ul>
         </header>
@@ -41,7 +49,23 @@ function App() {
       </div>
 
       <JobBoard />
-    </>
+
+      <div className="position-fixed bottom-0 w-100">
+        <div className="container">
+          <footer className="d-flex justify-content-end">
+            <p>
+              Made by{" "}
+              <a
+                href="https://www.linkedin.com/in/tomastibensky/"
+                target="_blank"
+              >
+                @ttibensky
+              </a>
+            </p>
+          </footer>
+        </div>
+      </div>
+    </div>
   );
 }
 
