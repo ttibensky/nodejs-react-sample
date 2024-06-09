@@ -20,7 +20,7 @@ type FormJob = {
 };
 
 function JobCreateModal({ show, setShow, fetchJobs }: P) {
-  const defaultJob = {
+  const defaultJob: FormJob = {
     customerName: "",
     type: "Plumbing",
     status: "Scheduled",
@@ -36,7 +36,10 @@ function JobCreateModal({ show, setShow, fetchJobs }: P) {
     e.preventDefault();
     // @TODO validation
     try {
-      await axios.post("http://localhost:3001/jobs", formJob); // @TODO move to .env
+      await axios.post(
+        `${import.meta.env.VITE_BACKEND_BASE_URL}/jobs`,
+        formJob
+      );
       setJob(defaultJob);
       fetchJobs();
       handleClose();

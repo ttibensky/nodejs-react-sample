@@ -30,7 +30,8 @@ It utilizes:
 ## Requirements
 
 - install Docker https://docs.docker.com/engine/install/
-- install Task https://taskfile.dev/installation
+- install Task https://taskfile.dev/installation (optional)
+  - if you don't want to use Task, you will need to type docker commands and their arguments manually
 
 ## Start the project
 

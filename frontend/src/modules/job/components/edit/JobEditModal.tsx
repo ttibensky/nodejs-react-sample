@@ -22,7 +22,7 @@ type FormJob = {
 };
 
 function JobEditModal({ job, show, setShow, fetchJobs }: P) {
-  const defaultJob = {
+  const defaultJob: FormJob = {
     customerName: job.customerName,
     type: job.type,
     status: job.status,
@@ -38,7 +38,10 @@ function JobEditModal({ job, show, setShow, fetchJobs }: P) {
     e.preventDefault();
     // @TODO validation
     try {
-      await axios.put(`http://localhost:3001/jobs/${job.id}`, formJob); // @TODO move to .env
+      await axios.put(
+        `${import.meta.env.VITE_BACKEND_BASE_URL}/jobs/${job.id}`,
+        formJob
+      );
       setJob(defaultJob);
       fetchJobs();
       handleClose();

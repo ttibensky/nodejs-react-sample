@@ -9,7 +9,9 @@ function JobBoard() {
 
   const fetchJobs = useCallback(async () => {
     try {
-      const response = await axios.get("http://localhost:3001/jobs");
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_BASE_URL}/jobs`
+      );
       setJobs(response.data.jobs);
     } catch (error) {
       console.error("Error fetching jobs:", error);

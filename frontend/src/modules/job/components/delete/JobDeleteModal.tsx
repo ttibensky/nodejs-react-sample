@@ -18,7 +18,9 @@ function JobDeleteModal({ job, show, setShow, fetchJobs }: P) {
     e.preventDefault();
     // @TODO validation
     try {
-      await axios.delete(`http://localhost:3001/jobs/${job.id}`); // @TODO move to .env
+      await axios.delete(
+        `${import.meta.env.VITE_BACKEND_BASE_URL}/jobs/${job.id}`
+      );
       fetchJobs();
       handleClose();
       // @TODO display success message
