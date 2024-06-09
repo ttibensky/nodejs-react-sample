@@ -2,6 +2,7 @@ import { Job } from "../../types/Job";
 import JobEditButton from "../edit/JobEditButton";
 import JobDeleteButton from "../delete/JobDeleteButton";
 import JobShowButton from "../show/JobShowButton";
+import { format } from "date-fns";
 
 type P = {
   job: Job;
@@ -13,7 +14,7 @@ function JobBoardRow({ job }: P) {
       <td>{job.customerName}</td>
       <td>{job.type}</td>
       <td>{job.status}</td>
-      <td>{job.appointmentDate}</td>
+      <td>{format(job.appointmentDate, "yyyy-MM-dd' at 'hh:mm")}</td>
       <td>{job.technician}</td>
       <td>
         <JobShowButton className="btn-sm me-1" job={job} />
