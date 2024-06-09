@@ -45,7 +45,7 @@ function JobForm({ formId, formJob, setJob, handleSubmit }: P) {
         >
           <option value="Plumbing">Plumbing</option>
           <option value="Heating">Heating</option>
-          <option value="Electic">Electic</option>
+          <option value="Electrical">Electrical</option>
         </Form.Select>
       </Form.Group>
 
@@ -61,7 +61,7 @@ function JobForm({ formId, formJob, setJob, handleSubmit }: P) {
           value={formJob.status}
         >
           <option value="Scheduled">Scheduled</option>
-          <option value="Done">Done</option>
+          <option value="Completed">Completed</option>
           <option value="Canceled">Canceled</option>
         </Form.Select>
       </Form.Group>
