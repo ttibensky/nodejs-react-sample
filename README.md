@@ -29,6 +29,8 @@ It utilizes:
   - [Docker](https://www.docker.com/) for stable environment
   - [Task](https://taskfile.dev/) for easier command line usage
 
+![App Screenshot](./docs/screenshot.png)
+
 ## Requirements
 
 - install Docker https://docs.docker.com/engine/install/
